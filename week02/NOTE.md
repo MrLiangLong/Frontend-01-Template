@@ -29,6 +29,7 @@
 	而JS输入元素的语法构成，可以分为WhiteSpace/LineTerminator/Common/Token
 
 ### INPUTELEMENT
+```
 INPUTELEMENT
 	WhiteSpace  //空格
 		TAB
@@ -76,7 +77,7 @@ INPUTELEMENT
 					UTF
 					科普：为啥有\r,\n两个换行符 这是两个动作兼容打印机，
 	//	Keywords  关键字(for/let...) undefined未设计成关键字，全局下不可改，局部可以
-	
+```	
 ### Unicode
 	
 	计算机解析文字和符号流程：
