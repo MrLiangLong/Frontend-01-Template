@@ -22,16 +22,15 @@ int main(int argc,const char * argv[]){
 	NSLog(@"%",[result toString]);
 }
 
-```
 
 代码分析：
-> 
 evaluateScript【执行代码块】执行产生一个宏任务。
 	Promise产生一个微任务，当遇到resolve()，又产生一个微任务 this.a=3; 会产生微任务列表
 callWithArgument【执行函数】执行产生一个宏任务(执行JS代码片段)，
 	产生微任务return this.a
 Promise产生微任务`
 
+```
 
 ##### 2、宏任务与微任务总结
 * 在JS引擎执行的叫微任务，几个微任务构成1个宏任务，1个宏任务存在一个微任务列表，微任务列表执行遵照执行队列，一切JS都是微任务。
