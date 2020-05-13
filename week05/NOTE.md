@@ -10,11 +10,30 @@ JS Context =>Realm
 表达式
 直接量/变量/this
 ```
-##### 知识扩展
+#### 知识扩展
+
+##### Function学习
+1、在JavaScript里，函数是一种特殊的对象，可以用于赋值、传参和作为返回值，也称函数为一等公民(Fist Class Function)。  
+2、函数在V8内部的实现：
+```
+Function
+	key --> value
+	key1-->value
+	
+	//隐藏属性
+	name-->函数名 || anonymous
+	code-->函数代码
+```
+3、函数是特殊的对象，在于函数可以被调用，调用时还需要关联相关的执行上下文。
+
+##### 应用
+```
 netstat -a -n #各个端口占用
 netstat -ano #各个端口占用和进程PID
 netstat -aon | findstr "8088"
 tasklist | findstr "8088" 查看端口号所对应的应用程序
+```
+
 
 ##### 课堂笔记
 1、JS Context=>Realm
@@ -22,10 +41,6 @@ tasklist | findstr "8088" 查看端口号所对应的应用程序
 		JS对象：
 			NaN/undefined/Number/Set/Math...详情参考重新前端
 	多个Realm可以相互通信，比如iframe
-
-作业：
-a、获取所有Realm里的所有js对象：132个。
-b、g6 graph visulaization将对象可视化
 
 2、函数调用
 	Execution Context Stack：执行上下文栈
