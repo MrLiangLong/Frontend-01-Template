@@ -35,7 +35,7 @@ Promise产生微任务`
 ##### 2、宏任务与微任务总结
 * 在JS引擎执行的叫微任务，几个微任务构成1个宏任务，1个宏任务存在一个微任务列表，微任务列表执行遵照执行队列，一切JS都是微任务。
 * 出JS引擎的叫宏任务：evaluateScript/callWithArgument，比如：script。 宿主提供的方法是宏任务，比如：UI交互/setTimeout/setTimeInternal。
-* Promise：JS本身自带的API，属于微任务。
+* Promise/MutationObserver：JS本身自带的API，属于微任务。Promise在js context操作，MutationObserver可能是object-c操作
 * JS单线程执行的，每条同步代码归为一个微任务。
 * JS事件循环，在JS引擎之外，也不属于JS语言的一部分，而是JS实现方实现的一种方式。
 
