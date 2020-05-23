@@ -1,5 +1,40 @@
-# 浏览器工作原理
-## HTML缓存
+# HTTP相关知识
+
+## 一、Http响应头信息
+* Allow：服务器支持的请求方法(Get/Post等)
+* Content-Encoding：文档的编码方法。  
+    只有在解码后才可以得知Content-Type头指定的内容类型。Gzip压缩文档能够减少HTML文档下载时间。服务端Server可以通过Accpt-Encoding检查浏览器是否支持gzip，支持返回压缩经gzip压缩的页面，否则返回普通页面。
+* Content-Length: 表示内容长度。
+* Content-Type: 表示文档属于什么MIME类型。
+* Date： 当前的GMT时间。
+* Expires：文档过期时间，秒。
+* Last-Modified：文档最后改动时间。
+* Location：客户端应当从哪里去提取文档，用于重定向，状态码为302.
+* Refresh： 浏览器应该在多少时间内刷新文档，秒。
+* Server： 服务器名称。
+* Set-Cookie： 设置页面关联的Cookie。
+
+
+## 一、HTTP Content-Type
+    用于定义网络文件的类型和网页的编码，决定浏览器以什么形式、什么编码读取这个文件。Content-Type标头告诉客户端实际返回内容的内容类型。  
+
+    常见的媒体格式类型：
+* text/html: HTML格式
+* text/plain: 纯文本格式
+* text/xml: XML格式
+* image/gif: gif图片格式
+* image/jpeg: jpg图片格式
+* image/png: png图片格式
+    以application开头的媒体格式类型：
+* application/json: JSON数据格式
+* application/pdf: pdf格式
+* application/msword: Word文档格式
+* application/octet-stream: 二进制流数据(常见的文件下载)
+* application/x-www-form-urlencoded: 表单默认的提交数据格式，被编码为key/value格式发送到服务器
+    媒体格式上传文件使用的：
+* multipart/form-data: 需要在表单中进行文件上传时，使用该格式
+
+## 二、HTML缓存
     Http缓存分为强缓存和协商缓存，用于提升资源的加载，减少网络传输，缓解服务器压力。
 ### 强缓存
     无需发送请求到服务器，直接读取浏览器本地缓存。强缓存又分为Disk Cache(存在硬盘中)和Memory Cache(存在内存中),存放位置是由浏览器控制的。
@@ -33,5 +68,7 @@
 ETag/If-None-Match 的出现主要解决了 Last-Modified/If-Modified-Since 所解决不了的问题：  
 1、如果文件的修改频率在秒级以下，Last-Modified/If-Modified-Since 会错误地返回 304。  
 2、如果文件被修改了，但是内容没有任何变化的时候，Last-Modified/If-Modified-Since 会错误地返回 304。
+
+Etag优先级高，因为相对于 last modified 收到时钟的影响以及不能标记毫秒级的改变，应该优先使用etag 来判断文件是否发生变化。
 
 
