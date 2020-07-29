@@ -1,5 +1,4 @@
 import {createElement,Text,Wrapper} from './createElement.js'
-import {Timeline,Animation,ease,linear}  from '../week15/animation/animation'
 
 class Carouse {
     constructor(config) {
@@ -24,9 +23,6 @@ class Carouse {
         })
 
         let root = <div class="carousel">{children}</div>
-
-        let timeline = new Timeline;
-        timeline.start();
         
         let position = 0;
         let nextPic = () => {
@@ -36,17 +32,23 @@ class Carouse {
             let current = children[position];
             let next = children[nextPostion];
 
-            let curAni = new Animation(current.style,"transform",
-              -100*position,-100-100*position,500,0,ease,v=>`translateX(${v}%)`
-            )
-            let nextAni = new Animation(next.style,"transform",
-              100 - 100 * nextPostion,-100 * nextPostion,500,0,ease,v=>`translateX(${v}%)`
-            )
-            timeline.add(curAni);
-            timeline.add(nextAni)
-            setTimeout(nextPic, 3000)
+            current.style.transition = "ease 0s";
+            next.style.transition = "ease 0s";
+
+            current.style.transform = `translateX(${-100 * position}%)`;
+            next.style.transform = `translateX(${100 - 100 * nextPostion}%)`;
+
+            setTimeout(() => {
+                current.style.transition = "ease 0.5s";
+                next.style.transition = "ease 0.5s";
+                current.style.transform = `translateX(${-100 - 100 * position}%)`;
+                next.style.transform = `translateX(${-100 * nextPostion}%)`;
+
+                position = nextPostion;
+            }, 16);//16m一帧  两段动画，一段动画在下一帧执行
+          //  setTimeout(nextPic, 3000)
         }
-        setTimeout(nextPic, 3000)
+        nextPic();
 
         return root;
     }

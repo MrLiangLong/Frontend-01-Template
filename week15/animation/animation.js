@@ -1,4 +1,4 @@
-
+import cubicBezier from './cubicBezier'
 export class Timeline {
     constructor() {
         this.animations = [];
@@ -14,6 +14,9 @@ export class Timeline {
 
             //   t = animation.during+animation.delay;
             let { object, property, template, start, end, timingFunction, delay, during, addTime } = animation;
+
+            if(t<delay+addTime)
+                continue;
 
             let progression = timingFunction((t - delay - addTime) / during);//0-1直接的数
             if (t > during + delay + addTime) {
@@ -34,8 +37,10 @@ export class Timeline {
             return;
         this.state = "paused"
         this.pauseTime = Date.now();
-        if (this.requestId !== null)
+        if (this.requestId !== null){
             cancelAnimationFrame(this.requestId);
+            this.requestId = null;
+        }      
     }
     resume() {
         if (this.state != "paused")
@@ -54,6 +59,10 @@ export class Timeline {
     restart() {
         if (this.state == "playing")
             this.pause();
+       
+        for(let animation of this.finishedAnimations)
+            this.animations.push(animation)    
+            
         this.animation = [];
         this.requestId = null;
         this.startTime = Date.now();
@@ -69,6 +78,7 @@ export class Timeline {
         else
             animation.addTime = addTime !== void 0 ? addTime : 0;
     }
+
 
 }
 
@@ -111,5 +121,8 @@ export class ColorAnimation {
         }
     }
 }
+
+export let ease =  cubicBezier(0.25, .1, 0.25, 1);
+export let linear = cubicBezier(0.25, .1, 0.25, 1);
 
 

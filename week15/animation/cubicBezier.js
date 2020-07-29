@@ -82,3 +82,4 @@ function cubicBezier(p1x, p1y, p2x, p2y) {
 }
 
 window.cubicBezier = cubicBezier;
+export default cubicBezier;
