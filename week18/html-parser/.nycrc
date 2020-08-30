@@ -1,0 +1,10 @@
+{
+  "all": true,
+  "include": [
+    "src/*.js"
+  ],
+  "require": [
+    "@babel/register"
+  ],
+  "extends": "@istanbuljs/nyc-config-babel"
+}
